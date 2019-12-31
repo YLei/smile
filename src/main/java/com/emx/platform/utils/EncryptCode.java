@@ -104,7 +104,7 @@ public abstract class EncryptCode {
      * @throws Exception
      */
     public static String encryptBASE64(byte[] key) throws Exception {
-        Base64.Encoder encoder = Base64.getEncoder();
+        Encoder encoder = Base64.getEncoder();
         String encode = encoder.encodeToString(key);
         return encode;
     }

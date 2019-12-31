@@ -2,6 +2,7 @@ package com.emx.platform.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +17,7 @@ import com.emx.platform.utils.JwtUtil;
 public class UserLoginService {
 	@Autowired
 	AuthenticationManager authenticationManager;
+
 	@Autowired
     private UserDetailsService userDetailsService;
 	@Autowired

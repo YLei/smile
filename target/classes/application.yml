@@ -12,7 +12,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 #开发库
     username: root
-    password: Lb19830213
+    password: Lb@19830213
     url: jdbc:mysql://39.107.126.42:3306/face?useUnicode=true&characterEncoding=utf-8
     sql-script-encoding: UTF-8
     #最大活跃数
