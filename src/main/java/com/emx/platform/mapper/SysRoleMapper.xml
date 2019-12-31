@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.emx.platform.dao.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.emx.platform.domain.SysRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="stat" property="stat" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, name, note, stat, create_time, creator, operator, operate_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emx.platform.domain.SysRole" >
+    insert into sys_role (id, code, name, 
+      note, stat, create_time, 
+      creator, operator, operate_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{stat,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emx.platform.domain.SysRole" >
+  	<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID() AS ID 
+	</selectKey>
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        code,
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="stat != null" >
+        stat,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      get_trans_num('ROLE_'),
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null" >
+        #{stat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emx.platform.domain.SysRole" >
+    update sys_role
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null" >
+        stat = #{stat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emx.platform.domain.SysRole" >
+    update sys_role
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      stat = #{stat,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByRole" parameterType="com.emx.platform.domain.SysRole" resultType="com.emx.platform.vo.RoleListVo">
+   select x1.id as role_id,x1.code as code,x1.name as name,x1.note as note, x1.stat as stat
+    from sys_role x1
+    <where> 1=1
+      <if test="code != null and code != ''" >
+        and x1.code like CONCAT('%',#{code},'%')  
+      </if>
+      <if test="name != null and name != ''" >
+        and x1.name like CONCAT('%',#{name},'%')  
+      </if>
+        and x1.stat = '启用'
+	</where>
+      order by x1.operate_time desc
+  </select>
+  
+  <select id="selectListByRole" parameterType="com.emx.platform.domain.SysRole" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    <where> 1=1
+      <if test="code != null" >
+        and code = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null" >
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="note != null" >
+        and note = #{note,jdbcType=VARCHAR}
+      </if>
+      <if test="stat != null" >
+        and stat = #{stat,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="creator != null" >
+        and creator = #{creator,jdbcType=VARCHAR}
+      </if>
+      <if test="operator != null" >
+        and operator = #{operator,jdbcType=VARCHAR}
+      </if>
+      <if test="operateTime != null" >
+        and operate_time = #{operateTime,jdbcType=TIMESTAMP}
+      </if>
+        and stat = '启用'
+	</where>
+      order by create_time asc
+  </select>
+  
+  <select id="selectByRoleName" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    <where>
+    name = #{name,jdbcType=VARCHAR}
+    and stat = '启用'
+    <if test="id != null and id !=''" >
+    and id != #{id,jdbcType=INTEGER}
+    </if>
+    </where>
+  </select>
+  
+</mapper>

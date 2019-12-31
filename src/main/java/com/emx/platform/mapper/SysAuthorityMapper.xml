@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.emx.platform.dao.SysAuthorityMapper" >
+  <resultMap id="BaseResultMap" type="com.emx.platform.domain.SysAuthority" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="seq" property="seq" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="stat" property="stat" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, pid, name, seq, level, type, url, stat, creator, create_time, operate_time, operator
+  </sql>
+  <sql id="Base_Column_List1" >
+    x1.id, x1.code, x1.pid, x1.name, x1.seq, x1.level, x1.type, x1.url, x1.stat, x1.creator, x1.create_time, x1.operate_time, x1.operator
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_authority
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_authority
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emx.platform.domain.SysAuthority" >
+    insert into sys_authority (id, code, pid, 
+      name, seq, level, type, 
+      url, stat, creator, 
+      create_time, operate_time, operator
+      )
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{url,jdbcType=VARCHAR}, #{stat,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emx.platform.domain.SysAuthority" >
+    insert into sys_authority
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="stat != null" >
+        stat,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null" >
+        #{stat,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emx.platform.domain.SysAuthority" >
+    update sys_authority
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null" >
+        stat = #{stat,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emx.platform.domain.SysAuthority" >
+    update sys_authority
+    set code = #{code,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      stat = #{stat,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByAuthority" parameterType="com.emx.platform.domain.SysAuthority" resultType="com.emx.platform.vo.AuthorityListVo">
+    select 
+    id as authId,name as name, code as code,seq as seq,level as level,pid as pid,url as url, stat
+	from sys_authority
+    <where> stat == '启用'
+	</where>
+      order by level asc, seq asc,create_time asc
+  </select>
+  
+  <select id="selectByAuthorityPid" resultType="com.emx.platform.vo.AuthorityListVo">
+    select 
+    id as authId,name as name, code as code,seq as seq,level as level,pid as pid,url as url,stat
+	from sys_authority
+    <where> 
+    	stat = '启用'
+      <if test="pid != null and pid !=''" >
+        and pid = #{pid,jdbcType=INTEGER}
+      </if>
+	</where>
+      order by level asc, seq asc
+  </select>
+  <select id="selectListByAuthority" parameterType="com.emx.platform.domain.SysAuthority" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_authority
+    <where> 
+      <if test="code != null" >
+        and code = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="pid != null" >
+        and pid = #{pid,jdbcType=INTEGER}
+      </if>
+      <if test="name != null" >
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="seq != null" >
+        and seq = #{seq,jdbcType=INTEGER}
+      </if>
+      <if test="level != null" >
+        and level = #{level,jdbcType=INTEGER}
+      </if>
+      <if test="type != null" >
+        and type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="url != null" >
+        and url = #{url,jdbcType=VARCHAR}
+      </if>
+      <if test="stat != null" >
+        and stat = #{stat,jdbcType=VARCHAR}
+      </if>
+      <if test="creator != null" >
+        and creator = #{creator,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operate_time != null" >
+        and operate_time = #{operateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operator != null" >
+        and operator = #{operator,jdbcType=VARCHAR}
+      </if>
+	</where>
+      order by level asc, seq asc
+  </select>
+  <select id="selectAuthByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List1" />
+    from sys_authority x1  join sys_role x2 join sys_role_authority x3
+    on x1.id = x3.auth_id and x2.id = x3.role_id
+    where x2.id = #{id,jdbcType=INTEGER}
+    and x1.stat = '启用'
+  </select>
+  <select id="selectAuthByRoleList" resultType="com.emx.platform.domain.SysAuthority">
+    select distinct(x.id),x.pid,x.`name`,x.url,x.seq from sys_authority x
+	LEFT JOIN sys_role_authority sra on  x.id = sra.auth_id
+	LEFT JOIN sys_role r on sra.role_id = r.id
+	where 
+	r.`code` in  
+          <foreach item="item" index="index" collection="roleCode" open="("  
+                separator="," close=")">  
+                #{item}  
+          </foreach> 
+	and x.type = #{type,jdbcType=INTEGER}
+	<if test="pid != null" >
+        and x.pid = #{pid,jdbcType=VARCHAR}
+    </if>
+    and x.stat = '启用'
+    order by x.seq 
+  </select>
+</mapper>
