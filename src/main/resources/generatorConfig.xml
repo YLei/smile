@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-
+	<classPathEntry  location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\8.0.18\mysql-connector-java-8.0.18.jar"/>
 	<context id="frms-mgr" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
@@ -15,8 +15,8 @@
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
 		
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://39.107.126.42:3306/store"
-			userId="root" password="Xuan@150530">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://39.107.126.42:3306/face"
+			userId="root" password="Lb@19830213">
 		</jdbcConnection>
 
 		<javaModelGenerator targetPackage="com.emx.platform.domain" targetProject="./src/main/java">
@@ -32,13 +32,18 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		
-		<table schema="" tableName="param_goods_currency" domainObjectName="ParamGoodsCurrency"
-			enableCountByExample="true" enableUpdateByExample="true"
-			enableDeleteByExample="true" enableSelectByExample="true"
-			selectByExampleQueryId="true">
-			<property name="useActualColumnNames" value="false" />
-			<property name="ignoreQualifiersAtRuntime" value="true" />
-			<property name="constructorBased" value="false" />
+		<table schema="" tableName="equipment" domainObjectName="Equipment"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table schema="" tableName="merchants" domainObjectName="Merchants"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+<!--			<property name="useActualColumnNames" value="false" />-->
+<!--			<property name="ignoreQualifiersAtRuntime" value="true" />-->
+<!--			<property name="constructorBased" value="false" />-->
 		</table>
 	</context>
 </generatorConfiguration> 
