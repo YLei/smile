@@ -1,0 +1,133 @@
+package com.emx.platform.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class Equipment implements Serializable {
+    private String id;
+
+    private String serialNo;
+
+    private String deviceNo;
+
+    private String deviceType;
+
+    private String stat;
+    
+    private String creator;
+
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss",timezone = "GMT")
+    private Date createTime;
+
+    private String operator;
+
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss",timezone = "GMT")
+    private Date operateTime;
+    
+    private static final long serialVersionUID = 1L;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
+    public String getSerialNo() {
+        return serialNo;
+    }
+
+    public void setSerialNo(String serialNo) {
+        this.serialNo = serialNo == null ? null : serialNo.trim();
+    }
+
+    public String getDeviceNo() {
+        return deviceNo;
+    }
+
+    public void setDeviceNo(String deviceNo) {
+        this.deviceNo = deviceNo == null ? null : deviceNo.trim();
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType == null ? null : deviceType.trim();
+    }
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat == null ? null : stat.trim();
+    }
+    
+    public String getCreator() {
+		return creator;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getOperator() {
+		return operator;
+	}
+
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+
+	public Date getOperateTime() {
+		return operateTime;
+	}
+
+	public void setOperateTime(Date operateTime) {
+		this.operateTime = operateTime;
+	}
+
+	@Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Equipment other = (Equipment) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getSerialNo() == null ? other.getSerialNo() == null : this.getSerialNo().equals(other.getSerialNo()))
+            && (this.getDeviceNo() == null ? other.getDeviceNo() == null : this.getDeviceNo().equals(other.getDeviceNo()))
+            && (this.getDeviceType() == null ? other.getDeviceType() == null : this.getDeviceType().equals(other.getDeviceType()))
+            && (this.getStat() == null ? other.getStat() == null : this.getStat().equals(other.getStat()));
+	}
+
+	@Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getSerialNo() == null) ? 0 : getSerialNo().hashCode());
+        result = prime * result + ((getDeviceNo() == null) ? 0 : getDeviceNo().hashCode());
+        result = prime * result + ((getDeviceType() == null) ? 0 : getDeviceType().hashCode());
+        result = prime * result + ((getStat() == null) ? 0 : getStat().hashCode());
+        return result;
+    }
+}

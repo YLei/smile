@@ -1,0 +1,13 @@
+package com.emx.platform.params;
+
+import lombok.Data;
+
+@Data
+public class MerchantsListParam {
+	private String merchantsName;  //商户名(模糊查询)
+	private String contact; //联系人(模糊查询)
+	
+	
+	private Integer row;		//当前页
+	private Integer pagesize;	//每页显示
+}

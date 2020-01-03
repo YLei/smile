@@ -1,0 +1,30 @@
+package com.emx.platform.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.emx.platform.domain.Merchants;
+import com.emx.platform.params.MerchantsListParam;
+
+@Mapper
+public interface MerchantsMapper {
+    int deleteByPrimaryKey(String id);
+
+    int insert(Merchants record);
+
+    int insertSelective(Merchants record);
+
+    Merchants selectByPrimaryKey(String id);
+
+    int updateByPrimaryKeySelective(Merchants record);
+
+    int updateByPrimaryKey(Merchants record);
+    
+    //查询商户列表
+    List<Merchants> merchantsList(MerchantsListParam param);
+    
+    //修改状态为禁用/启用
+    int updateStat(@Param("id")String id , @Param("stat")String stat);
+}

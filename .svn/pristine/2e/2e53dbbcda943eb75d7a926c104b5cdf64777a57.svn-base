@@ -1,0 +1,69 @@
+package com.emx.platform.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.emx.platform.dao.EquipmentMapper;
+import com.emx.platform.domain.Equipment;
+import com.emx.platform.params.EquipmentListParam;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+@Service
+public class EquipmentService {
+	@Autowired
+	private EquipmentMapper equipmentMapper;
+	
+	/**
+	 *
+	 * 查询设备列表
+	 * @author miaoxueyu
+	 * @date 2020-1-2 16:46:19
+	 */
+	public PageInfo<Equipment> list(EquipmentListParam param) {
+		PageHelper.startPage(param.getRow(),param.getPagesize());
+		
+		return new PageInfo<Equipment>(equipmentMapper.list(param));
+	}
+	
+	
+	/**
+	 * 添加设备
+	 * @author miaoxueyu
+	 * @date 2020-1-2 16:46:19
+	 */
+	public int addEquipment(Equipment equipment) {
+		
+		return equipmentMapper.insertSelective(equipment);
+	}
+	
+	/**
+	 * 修改设备状态
+	 * @author miaoxueyu
+	 * @date 2020-1-2 17:20:55
+	 */
+	public int updateStat(String id , String stat) {
+		
+		return equipmentMapper.updateStat(id, stat);
+	}
+	
+	/**
+	 * 根据id查询设备详情
+	 * @author miaoxueyu
+	 * @date 2020-1-2 17:24:16
+	 */
+	public Equipment selectInfoById(String id) {
+		
+		return equipmentMapper.selectInfoById(id);
+	}
+	
+	/**
+	 * 根据id修改设备信息
+	 * @author miaoxueyu
+	 * @date 2020-1-2 17:25:24
+	 */
+	public int updateInfoByid(Equipment equipment) {
+		
+		return equipmentMapper.updateByPrimaryKeySelective(equipment);
+	}
+}

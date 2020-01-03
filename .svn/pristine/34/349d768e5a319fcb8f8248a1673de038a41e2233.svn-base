@@ -1,0 +1,79 @@
+package com.emx.platform.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.emx.platform.common.DictionaryContext;
+import com.emx.platform.common.ResultEnum;
+import com.emx.platform.dao.MerchantsMapper;
+import com.emx.platform.domain.Equipment;
+import com.emx.platform.domain.Merchants;
+import com.emx.platform.params.MerchantsListParam;
+import com.emx.platform.params.ParamId;
+import com.emx.platform.utils.Result;
+import com.emx.platform.utils.ResultUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+import io.swagger.annotations.ApiOperation;
+
+@Service
+public class MerchantsService {
+	@Autowired
+	private MerchantsMapper merchantsMapper;
+	
+	/**
+	 *
+	 * 查询商家列表
+	 * @author miaoxueyu
+	 * @date 2020-1-2 17:30:42
+	 */
+	public PageInfo<Merchants> merchantslist(MerchantsListParam param) {
+		PageHelper.startPage(param.getRow(),param.getPagesize());
+		
+		return new PageInfo<Merchants>(merchantsMapper.merchantsList(param));
+	}
+	
+	/**
+	 * 添加商家
+	 * @author miaoxueyu
+	 * @date 2020-1-2 16:46:19
+	 */
+	public int addEquipment(Merchants merchants) {
+		
+		return merchantsMapper.insertSelective(merchants);
+	}
+	
+	/**
+	 * 修改商家状态
+	 * @author miaoxueyu
+	 * @date 2020-1-2 17:20:55
+	 */
+	public int updateStat(String id , String stat) {
+		
+		return merchantsMapper.updateStat(id, stat);
+	}
+	
+	/**
+	 * 根据id查询商家详情
+	 * @author miaoxueyu
+	 * @date 2020-1-2 17:24:16
+	 */
+	public Merchants selectInfoById(String id) {
+		
+		return merchantsMapper.selectByPrimaryKey(id);
+	}
+	
+	/**
+	 * 根据id修改商家信息
+	 * @author miaoxueyu
+	 * @date 2020-1-2 17:25:24
+	 */
+	public int updateInfoByid(Merchants merchants) {
+		
+		return merchantsMapper.updateByPrimaryKeySelective(merchants);
+	}
+	
+}

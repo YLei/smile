@@ -1,0 +1,33 @@
+package com.emx.platform.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import com.emx.platform.domain.Equipment;
+import com.emx.platform.params.EquipmentListParam;
+
+@Mapper
+public interface EquipmentMapper {
+    int deleteByPrimaryKey(String id);
+
+    int insert(Equipment record);
+
+    int insertSelective(Equipment record);
+
+    Equipment selectByPrimaryKey(String id);
+
+    int updateByPrimaryKeySelective(Equipment record);
+
+    int updateByPrimaryKey(Equipment record);
+    
+    //查询设备列表
+    List<Equipment> list(EquipmentListParam param);
+    
+    //修改状态为禁用/启用
+    int updateStat(@Param("id")String id , @Param("stat")String stat);
+    
+    //根据id查找设备详情
+    Equipment selectInfoById(String id);
+}

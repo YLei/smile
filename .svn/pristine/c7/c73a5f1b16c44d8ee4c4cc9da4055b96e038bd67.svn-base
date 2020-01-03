@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.emx.platform.dao.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.emx.platform.domain.SysUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="user_name" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="real_name" property="realname" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="seq" property="seq" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="stat" property="stat" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, user_name, password, real_name, tel, seq, email, stat, creator, create_time, 
+    operator, operate_time, icon
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=VARCHAR}
+    and stat = '启用'
+  </select>
+  
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where user_name = #{username,jdbcType=VARCHAR}
+    and stat = '启用'
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.emx.platform.domain.SysUser" >
+    insert into sys_user (id, code, user_name, 
+      password, real_name, tel, 
+      seq, email, stat, 
+      creator, create_time, operator, 
+      operate_time, dept_code, icon
+      )
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{seq,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{stat,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{deptCode,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emx.platform.domain.SysUser" >
+  	<selectKey keyProperty="id" resultType="string" order="BEFORE">  
+	        select replace(uuid(), '-', '') as id from dual
+	</selectKey>
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+       <if test="id != null" >
+        id,
+      </if>
+        code,
+      <if test="username != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="realname != null" >
+        real_name,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="stat != null" >
+        stat,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="deptCode != null" >
+        deptCode,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      get_trans_num('U_'),
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null" >
+        #{stat,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emx.platform.domain.SysUser" >
+    update sys_user
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        user_name = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        real_name = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null" >
+        stat = #{stat,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emx.platform.domain.SysUser" >
+    update sys_user
+    set code = #{code,jdbcType=VARCHAR},
+      user_name = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      real_name = #{realname,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      stat = #{stat,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      dept_code = #{deptCode,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByUser" parameterType="com.emx.platform.domain.SysUser" resultType="com.emx.platform.vo.UserListVo">
+    select x1.id as uid,x1.code as code,x1.user_name as username,x2.name as deptName, x2.id as deptId, 
+    GROUP_CONCAT(x3.name SEPARATOR ' | ') as roleName,x1.real_name as realname,x1.tel as tel,x1.email as email,x1.stat,x1.create_time as creattime
+    from sys_user x1 
+		left join sys_dept x2 on x1.dept_code = x2.code and x2.stat = '启用'
+		left join sys_user_role x4 on x1.id = x4.user_id
+		left join sys_role x3 on x3.id = x4.role_id and x3.stat = '启用'
+    <where> 1=1
+      <if test="realname != null and realname != ''" >
+        and x1.real_name like CONCAT('%',#{realname},'%')
+      </if>
+      <if test="deptName != null and deptName != ''" >
+        and x2.name like CONCAT('%',#{deptName},'%')
+      </if>
+      and x1.stat = '启用'
+	</where>
+	  GROUP BY x4.userId
+      order by x1.seq asc , x1.operate_time desc
+  </select>
+  
+  <select id="selectListByUser" parameterType="com.emx.platform.domain.SysUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    <where> 1=1
+      <if test="code != null" >
+        and code = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="username != null" >
+        and user_name = #{username,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null" >
+        and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="realname != null" >
+        and real_name = #{realname,jdbcType=VARCHAR}
+      </if>
+      <if test="tel != null" >
+        and tel = #{tel,jdbcType=VARCHAR}
+      </if>
+      <if test="seq != null" >
+        and seq = #{seq,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null" >
+        and email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="creator != null" >
+        and creator = #{creator,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operator != null" >
+        and operator = #{operator,jdbcType=VARCHAR}
+      </if>
+      <if test="operateTime != null" >
+        and operate_time = #{operateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="deptCode != null" >
+        dept_code = #{deptCode,jdbcType=VARCHAR}
+      </if>
+      <if test="icon != null" >
+        and icon = #{icon,jdbcType=VARCHAR}
+      </if>
+        and stat = '启用'
+	</where>
+      order by create_time asc
+  </select>
+  
+  <select id="selectAllListByUser" parameterType="com.emx.platform.domain.SysUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    <where> 1=1
+      <if test="code != null" >
+        and code = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="username != null" >
+        and user_name = #{username,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null" >
+        and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="realname != null" >
+        and real_name = #{realname,jdbcType=VARCHAR}
+      </if>
+      <if test="tel != null" >
+        and tel = #{tel,jdbcType=VARCHAR}
+      </if>
+      <if test="seq != null" >
+        and seq = #{seq,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null" >
+        and email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="creator != null" >
+        and creator = #{creator,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operator != null" >
+        and operator = #{operator,jdbcType=VARCHAR}
+      </if>
+      <if test="operateTime != null" >
+        and operate_time = #{operateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="deptCode != null" >
+        deptCode = #{deptCode,jdbcType=VARCHAR}
+      </if>
+      <if test="icon != null" >
+        and icon = #{icon,jdbcType=VARCHAR}
+      </if>
+	</where>
+      order by create_time asc
+  </select>
+  
+  <select id="selectListByRealName" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    <where>1=1
+    	<if test="realname !=null and realname !=''">
+    		and real_name like CONCAT('%',#{realname},'%')
+    	</if>
+    	and stat = '启用'
+    </where>
+    order by create_time asc
+  </select>
+  
+</mapper>
